@@ -13,10 +13,11 @@ public enum Command {
     ADD('a'),
     EDIT('e'),
     REMOVE('r'),
-    NEXT('n');
+    NEXT('n'),
+    PREVIOUS('p');
 
     private static final Map<Character, Command> LOOKUP_MAP;
-    private Character shortcut;
+    private final Character shortcut;
 
     static {
         LOOKUP_MAP = new HashMap<>();
@@ -24,7 +25,7 @@ public enum Command {
             LOOKUP_MAP.put(command.getShortcut(), command);
         }
     }
-    private Command(Character shortcut) {
+    Command(Character shortcut) {
         this.shortcut = shortcut;
     }
 

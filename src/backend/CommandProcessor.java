@@ -3,12 +3,13 @@ package backend;
 import enums.Command;
 import ui.MenuItem;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CommandProcessor {
     Scanner input = new Scanner(System.in);
+    String temp = "";
     Character user = ' ';
-    boolean isStringNumber = true;
     Command[] commands;
 
     public CommandProcessor(MenuItem menuItem) {
@@ -31,8 +32,10 @@ public class CommandProcessor {
         while (true) {
 
             System.out.println("\nType Command from command list above...");
-            user = input.nextLine().toLowerCase().charAt(0);
-
+            temp = input.next().toLowerCase();
+            if (!temp.equals(" ") && !temp.equals("\n")) {
+                user = temp.charAt(0);
+            } else System.out.println("Print something...");
 
             if (checkCommand(user)) {
                 return Command.retrieveByShortcut(user);

@@ -22,7 +22,7 @@ public abstract class MenuItem {
         this.commands = commands;
     }
 
-    public void showMenuItem () {
+    public void showMenuItem() {
         ClrScrForIdea.ClrScr();
         showMenuHeader();
         showMenuContent();
@@ -35,11 +35,13 @@ public abstract class MenuItem {
 
     private void showMenuFooter() {
         System.out.println("----- commands -----");
-        for (Command command : commands) {
-            command.printCommand();
+        if (commands != null) {
+            for (Command command : commands) {
+                command.printCommand();
+            }
         }
-    }
 
+    }
     public abstract void showMenuContent();
 }
 

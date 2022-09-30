@@ -1,14 +1,27 @@
 package ui;
 
+import backend.FileReader;
+import backend.FileWriter;
+import backend.Phonebook;
 import enums.Command;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MenuBuilder {
+    Phonebook phonebook = new Phonebook();
+    FileReader fileReader = new FileReader(phonebook);
+    FileWriter fileWriter = new FileWriter(phonebook);
+
+    Boot boot = new Boot(fileReader);
     MainMenu mainMenu = new MainMenu();
     Help help = new Help();
-    QuitMenu quitMenu = new QuitMenu();
+    QuitMenu quitMenu = new QuitMenu(fileWriter);
+    Viewer viewer = new Viewer(phonebook);
+    AddRecord addRecord = new AddRecord(phonebook);
+    ViewerNext viewerNext = new ViewerNext(viewer);
+    ViewerPrev viewerPrev = new ViewerPrev(viewer);
+
     Map<Command, MenuItem> definitions = new HashMap<>();
 
     public MenuBuilder() {
@@ -31,6 +44,10 @@ public class MenuBuilder {
         definitions.put(Command.HELP, help);
         definitions.put(Command.MENU, mainMenu);
         definitions.put(Command.QUIT, quitMenu);
+        definitions.put(Command.VIEW, viewer);
+        definitions.put(Command.ADD, addRecord);
+        definitions.put(Command.NEXT, viewerNext);
+        definitions.put(Command.PREVIOUS, viewerPrev);
     }
 
     public MainMenu getMainMenu() {
